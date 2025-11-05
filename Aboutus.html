@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Meet Our Team</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --panel: #111122;
+      --panel-alt: #1a1a2e;
+      --text: #e0e0e0;
+      --muted: #888;
+      --cyan: #00eaff;
+      --purple: #7d5fff;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Orbitron', Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      text-align: center;
+      margin: 0;
+    }
+
+    header {
+      position: relative;
+      padding: 60px 20px;
+      color: var(--cyan);
+      text-shadow: 0 0 8px var(--cyan);
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.5);
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("https://images.wallpapersden.com/image/download/neon-wave-futuristic-city_a2hrZ2qUmZqaraWkpJRmbmdlrWZlbWU.jpg") center/cover no-repeat;
+      opacity: 0.6;
+      filter: brightness(0.8);
+      z-index: 0;
+    }
+
+    header .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    header h1 {
+      font-size: clamp(2.5rem, 6vw, 3.5rem);
+      margin-bottom: 0.5rem;
+      color: var(--cyan);
+    }
+
+    header p {
+      color: var(--text);
+      opacity: 0.85;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+      transition: all 0.3s ease;
+      animation: pulse 2.5s infinite;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(125, 95, 255, 0.7);
+    }
+
+    /* Pulse glow animation */
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(125, 95, 255, 0.6);
+      }
+    }
+
+    main { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; }
+
+    section {
+      background-color: var(--panel-alt);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.2);
+    }
+
+    section h2 {
+      color: var(--cyan);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 6px var(--cyan);
+    }
+
+    section p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      justify-items: center;
+    }
+
+    figure {
+      background: var(--panel);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(125, 95, 255, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    figure:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+    }
+
+    figure img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 2px solid var(--purple);
+    }
+
+    figure figcaption {
+      padding: 1rem;
+      background-color: #0f0f1f;
+      color: var(--text);
+    }
+
+    figure figcaption strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+      color: var(--cyan);
+    }
+
+    figure figcaption span {
+      color: var(--purple);
+      display: block;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+
+    figure figcaption small {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    figure a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    footer {
+      background-color: var(--panel);
+      color: var(--muted);
+      padding: 1.5rem;
+      font-size: 0.85rem;
+      border-top: 1px solid #1e1e33;
+      box-shadow: 0 -2px 10px rgba(0, 234, 255, 0.2);
+    }
+
+    .socials a {
+      margin: 0 0.5rem;
+      color: var(--cyan);
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .socials a:hover { color: var(--purple); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero-content">
+      <h1>Meet Our Team</h1>
+      <p>Passionate individuals working together to achieve great things</p>
+      <a href="#members" class="cta-btn">Explore Members</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>About Us</h2>
+      <p>We are a diverse group of students collaborating on projects that combine creativity, technology, and teamwork. Each member brings unique skills and perspectives that make our group stronger together.</p>
+    </section>
+
+    <section id="members">
+      <h2>Our Members</h2>
+      <p>Click on a member to learn more about them</p>
+      <div class="grid">
+        <figure>
+          <a href="Enrico.html">
+            <img src="https://i.pinimg.com/280x280_RS/76/70/91/767091a67280ade0c3147f8997572b12.jpg" alt="Enrico" />
+            <figcaption>
+              <strong>Enrico Jose F. Abeson</strong>
+              <span>Backend Developer</span>
+              <small>Email: enricoabeson@example.com</small>
+            </figcaption>
+          </a>
+        </figure>
+
+        <figure>
+          <a href="Joachim.html">
+            <img src="https://i.pinimg.com/280x280_RS/5d/79/9c/5d799c7ff1fe66d62e338114d333a6ff.jpg" alt="Joachim" />
+            <figcaption>
+              <strong>Joachim M. Abelo</strong>
+              <span>UI/UX Designer</span>
+              <small>Email: qjiabelo25@tip.edu.ph</small>
+            </figcaption>
+          </a>
+        </figure>
+
+        <figure>
+          <a href="Jarod.html">
+            <img src="https://i.pinimg.com/280x280_RS/48/9b/34/489b34af6dd1bbcc8fd7b1f4700239be.jpg" alt="John Rod" />
+            <figcaption>
+              <strong>John Rod M. Legaspi</strong>
+              <span>Frontend Developer</span>
+              <small>Email: johnrodlegaspi19@gmail.com</small>
+            </figcaption>
+          </a>
+        </figure>
+        
+        <figure>
+          <a href="Jacob.html">
+            <img src="https://i.pinimg.com/280x280_RS/fb/a3/af/fba3af64f2966e42953f1c59a80dd4ab.jpg" alt="Jacob" />
+            <figcaption>
+              <strong>Jacob C. Guariña</strong>
+              <span>Testing and Debugging</span>
+              <small>Email: qjguarina25@tip.edu.ph</small>
+            </figcaption>
+          </a>
+        </figure>
+      </div>
+
+      <!-- NEW BUTTON SECTION -->
+      <div style="margin-top: 2.5rem;">
+        <a href="new 3.html" class="cta-btn">Home</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Our Group — Neon Edition
+    <div class="socials">
+      <a href="#">🌐</a>
+      <a href="#">💻</a>
+      <a href="#">📧</a>
+    </div>
+  </footer>
+</body>
+</html>

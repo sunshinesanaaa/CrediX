@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Jacob C. Guarina - Member Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --panel: #111122;
+      --panel-alt: #1a1a2e;
+      --text: #e0e0e0;
+      --muted: #888;
+      --cyan: #00eaff;
+      --purple: #7d5fff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Orbitron', Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      text-align: center;
+      line-height: 1.6;
+      padding: 2rem 1rem;
+    }
+
+    h1 {
+      color: var(--cyan);
+      text-shadow: 0 0 10px var(--cyan);
+      margin-bottom: 1rem;
+      font-size: clamp(2rem, 5vw, 3rem);
+    }
+
+    .member-section {
+      background-color: var(--panel-alt);
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 700px;
+      margin: 2rem auto;
+      box-shadow: 0 0 15px rgba(0, 234, 255, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .member-section:hover {
+      box-shadow: 0 0 25px rgba(125, 95, 255, 0.4);
+    }
+
+    h2 {
+      color: var(--purple);
+      text-shadow: 0 0 6px var(--purple);
+      margin-bottom: 1rem;
+    }
+
+    img {
+      max-width: 220px;
+      border-radius: 12px;
+      border: 2px solid var(--purple);
+      box-shadow: 0 0 20px rgba(125, 95, 255, 0.4);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 234, 255, 0.5);
+    }
+
+    p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0.75rem auto;
+      font-size: 1rem;
+    }
+
+    .info-section {
+      background: var(--panel);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      text-align: left;
+      color: var(--text);
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.2);
+    }
+
+    .info-section h3 {
+      color: var(--cyan);
+      text-shadow: 0 0 6px var(--cyan);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .info-section p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+
+    strong {
+      color: var(--purple);
+    }
+
+    /* Neon button for back link */
+    .back-link {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      color: #fff;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+      transition: all 0.3s ease;
+      animation: pulse 2.5s infinite;
+    }
+
+    .back-link:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(125, 95, 255, 0.6);
+    }
+
+    /* Pulse glow animation */
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(125, 95, 255, 0.6);
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome to Jacob's Profile Page</h1>
+
+  <div class="member-section">
+    <h2>Jacob C. Guarina</h2>
+    <img src="https://i.pinimg.com/280x280_RS/fb/a3/af/fba3af64f2966e42953f1c59a80dd4ab.jpg" alt="Joachim's photo">
+    <p>Jacob, a BSIT student at TIP (Technological Institute of the Philippines), is enthusiastic about technology and always eager to advance his knowledge.</p>
+    <p>Favorite hobbies: Online Games</p>
+    
+    <div class="info-section">
+      <h3>Personal Information</h3>
+      <p><strong>Age:</strong> 18 years old</p>
+      <p><strong>Email:</strong> qjguarina25@tip.edu.ph</p>
+      <p><strong>Location:</strong> Quezon City, Philippines</p>
+      <p><strong>Skills:</strong>C++</p>
+      <p><strong>Academic Background:</strong> Currently pursuing a Bachelor of Science in Information Technology (BSIT) at TIP.</p>
+    </div>
+
+    <a href="Aboutus.html" class="back-link">← Back to Home</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CrediX Online Top-Up & Games</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d1a;
+      --panel: #111122;
+      --panel-alt: #1a1a2e;
+      --text: #e0e0e0;
+      --muted: #888;
+      --cyan: #00eaff;
+      --purple: #7d5fff;
+    }
+
+    body {
+      font-family: 'Orbitron', Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+	header {
+		position: relative;              
+		color: var(--cyan);
+		padding: 25px;
+		box-shadow: 0 0 10px var(--cyan);
+		overflow: hidden;              
+	}
+
+	header::before {
+		content: "";
+		position: absolute;
+		inset: 0;                        
+		background: url("https://images.wallpapersden.com/image/download/neon-wave-futuristic-city_a2hrZ2qUmZqaraWkpJRmbmdlrWZlbWU.jpg")
+              center/cover no-repeat;
+		filter: brightness(0.8);
+		z-index: 0;                      
+	}
+
+	header * {
+		position: relative;
+		z-index: 1;                      
+	}
+
+    h2 {
+      color: var(--purple);
+      margin-top: 20px;
+    }
+
+    .games-section {
+      background-color: var(--panel-alt);
+      padding: 20px;
+      margin: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+
+
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); /* 5 per row */
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .game-item {
+      display: inline-block;
+      width: 160px;
+      height: 220px;
+      margin: 10px;
+      background-color: var(--panel);
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .game-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px var(--cyan);
+    }
+    .game-item img {
+      width: 100%;
+      height: 70%;
+      object-fit: cover;
+    }
+    .game-item h3 {
+      margin: 0;
+      padding: 8px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .game-details {
+      display: none;
+      margin: 20px auto;
+      max-width: 800px;
+      padding: 20px;
+      background-color: var(--panel);
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(125, 95, 255, 0.4);
+      text-align: left;
+    }
+    .game-details.active {
+      display: block;
+    }
+
+    .billing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .form-group label {
+      color: var(--cyan);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .form-group select,
+    .form-group input {
+      background-color: #0f0f1f;
+      color: var(--text);
+      border: 1px solid #1e2a3a;
+      border-radius: 8px;
+      padding: 10px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: box-shadow 0.2s ease;
+    }
+    .form-group select:focus,
+    .form-group input:focus {
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
+    .statement {
+      background-color: #0f0f1f;
+      border: 1px dashed #2a3650;
+      border-radius: 8px;
+      padding: 12px;
+      color: #cfd6e0;
+    }
+    .statement-title {
+      font-weight: 600;
+      color: var(--purple);
+      margin-bottom: 6px;
+    }
+    .statement-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 4px 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-weight: 600;
+      cursor: pointer;
+      color: #fff;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.3);
+    }
+    .btn-secondary {
+      background: #1e1e33;
+      border: 1px solid #2a3650;
+      color: #cfd6e0;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 12px rgba(0, 234, 255, 0.4);
+    }
+	.cta-btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 0 10px rgba(0, 234, 255, 0.4);
+      transition: all 0.3s ease;
+      animation: pulse 2.5s infinite;
+	  }
+	.cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(125, 95, 255, 0.7);
+    }
+	
+	.about-section {
+		background-color: var(--panel-alt);
+		margin: 40px 20px;
+		padding: 30px;
+		border-radius: 8px;
+		box-shadow: 0 0 10px rgba(125, 95, 255, 0.3);
+		text-align: center;
+	}
+
+	.about-section h2 {
+		color: var(--cyan);
+		font-size: 1.8rem;
+		margin-bottom: 15px;
+		text-shadow: 0 0 6px var(--cyan);
+	}
+
+	.about-section p {
+		color: var(--text);
+		font-size: 1rem;
+		line-height: 1.6;
+		margin: 10px auto;
+		max-width: 700px;
+	}
+	
+
+    footer {
+      background-color: var(--panel);
+      color: var(--muted);
+      padding: 1px;
+      font-size: 0.6rem;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+
+    @media (max-width: 680px) {
+      .billing-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <a href="new 3.html">
+    <img src="https://i.postimg.cc/vHQkKL21/BCO-4c11c8fe-acae-494a-8022-b181df216549-removebg-preview.png" 
+         alt="CrediX Logo" 
+         style="cursor: pointer;">
+  </a>
+  <h1></h1>
+</header>
+
+
+  <div class="games-section">
+
+    <div class="game-item" onclick="showGameDetails(1)">
+      <img src="https://i.pinimg.com/736x/95/ef/8c/95ef8cbe0ef355cea8dda81e73b1b44e.jpg" alt="MLBB">
+      <h3>MLBB</h3>
+    </div>
+    <div class="game-item" onclick="showGameDetails(2)">
+      <img src="https://i.pinimg.com/736x/23/ff/c5/23ffc5965f06b63d156e6d85cdea8e04.jpg" alt="VALORANT">
+      <h3>VALORANT</h3>
+    </div>
+    <div class="game-item" onclick="showGameDetails(3)">
+      <img src="https://i.pinimg.com/1200x/1a/c6/c5/1ac6c5d7cbf6c64b13923d7e258f34a3.jpg" alt="ROBLOX">
+      <h3>ROBLOX</h3>
+    </div>
+    <div class="game-item" onclick="showGameDetails(4)">
+      <img src="https://i.pinimg.com/736x/9d/d9/dc/9dd9dca0ddef0b1279ef3cccaae22e3a.jpg" alt="League of Legends">
+      <h3>League of Legends</h3>
+	</div>
+    <div class="game-item" onclick="showGameDetails(5)">
+		<img src="https://i.pinimg.com/736x/c7/4e/5b/c74e5bf57d250c1bfc7b0d96f39f42c7.jpg" alt="CODM">
+		<h3>CODM</h3>
+	</div>
+	<div class="game-item" onclick="showGameDetails(6)">
+		<img src="https://i.pinimg.com/736x/ec/eb/9f/eceb9ffeb8b15512d43af3201bce1cf5.jpg" alt="PUBG">
+		<h3>PUBG</h3>
+	</div>
+	<div class="game-item" onclick="showGameDetails(7)">
+		<img src="https://i.pinimg.com/736x/85/6d/f1/856df11b3578382bfaf7e433e9ce981e.jpg" alt="Counter-Strike 2">
+		<h3>Counter-Strike 2</h3>
+	</div>
+	<div class="game-item" onclick="showGameDetails(8)">
+		<img src="https://i.pinimg.com/736x/f2/8d/6a/f28d6a633126f012d24e4cbb2d28ed7c.jpg" alt="Dota 2">
+		<h3>Dota 2</h3>
+	</div>
+	<div class="game-item" onclick="showGameDetails(9)">
+		<img src="https://i.pinimg.com/736x/f8/e0/ce/f8e0ce01573023dc62aff0327b848417.jpg" alt="Clash of Clans">
+		<h3>Clash of Clans</h3>
+	</div>
+	<div class="game-item" onclick="showGameDetails(10)">
+			<img src="https://i.pinimg.com/736x/1b/7c/31/1b7c31d3936bd2cc181c37f649aa172e.jpg" alt="Fortnite">
+		<h3>Fortnite</h3>
+</div>
+  </div>
+
+  <div id="gameDetails1" class="game-details">
+    <h3>MLBB (Mobile Legends: Bang Bang)</h3>
+    <p>Select a diamond package, enter quantity, and review your total before payment.</p>
+
+    <div class="billing-grid">
+      <div class="form-group">
+        <label for="mlbbPackage">Package</label>
+        <select id="mlbbPackage">
+          <option value="50">50 Diamonds — ₱50</option>
+          <option value="150">150 Diamonds — ₱140</option>
+          <option value="300">300 Diamonds — ₱270</option>
+          <option value="600">600 Diamonds — ₱520</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="mlbbQty">Quantity</label>
+        <input type="number" id="mlbbQty" min="1" value="1">
+      </div>
+    </div>
+
+    <div class="statement" id="mlbbStatement">
+      <div class="statement-title">Billing statement</div>
+      <div class="statement-row"><span>Item:</span><span id="mlbbItem">50 Diamonds</span></div>
+      <div class="statement-row"><span>Unit price:</span><span id="mlbbUnit">₱50.00</span></div>
+      <div class="statement-row"><span>Quantity:</span><span id="mlbbQuantity">1</span></div>
+      <div class="statement-row"><span>Subtotal:</span><span id="mlbbSubtotal">₱50.00</span></div>
+      <div class="statement-row"><span>Service fee (₱10):</span><span id="mlbbFee">₱10.00</span></div>
+      <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="mlbbTotal">₱60.00</span></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="resetForm('mlbb')">Reset</button>
+      <button class="btn btn-primary" onclick="pay('mlbb')">Pay</button>
+    </div>
+  </div>
+
+  <div id="gameDetails2" class="game-details">
+    <h3>VALORANT</h3>
+    <p>Select a VP package, set quantity, and confirm total before payment.</p>
+
+    <div class="billing-grid">
+      <div class="form-group">
+        <label for="valPackage">Package</label>
+        <select id="valPackage">
+          <option value="300">300 VP — ₱250</option>
+          <option value="625">625 VP — ₱500</option>
+          <option value="1125">1125 VP — ₱900</option>
+          <option value="2400">2400 VP — ₱1,800</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="valQty">Quantity</label>
+        <input type="number" id="valQty" min="1" value="1">
+      </div>
+    </div>
+
+    <div class="statement" id="valStatement">
+      <div class="statement-title">Billing statement</div>
+      <div class="statement-row"><span>Item:</span><span id="valItem">300 VP</span></div>
+      <div class="statement-row"><span>Unit price:</span><span id="valUnit">₱250.00</span></div>
+      <div class="statement-row"><span>Quantity:</span><span id="valQuantity">1</span></div>
+      <div class="statement-row"><span>Subtotal:</span><span id="valSubtotal">₱250.00</span></div>
+      <div class="statement-row"><span>Service fee (₱10):</span><span id="valFee">₱10.00</span></div>
+      <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="valTotal">₱260.00</span></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="resetForm('val')">Reset</button>
+      <button class="btn btn-primary" onclick="pay('val')">Pay</button>
+    </div>
+  </div>
+
+  <div id="gameDetails3" class="game-details">
+    <h3>ROBLOX</h3>
+    <p>Select a Robux package, set quantity, and confirm total before payment.</p>
+
+    <div class="billing-grid">
+      <div class="form-group">
+        <label for="rbxPackage">Package</label>
+        <select id="rbxPackage">
+          <option value="80">80 Robux — ₱50</option>
+          <option value="400">400 Robux — ₱250</option>
+          <option value="800">800 Robux — ₱500</option>
+          <option value="1700">1700 Robux — ₱1,000</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="rbxQty">Quantity</label>
+        <input type="number" id="rbxQty" min="1" value="1">
+      </div>
+    </div>
+
+    <div class="statement" id="rbxStatement">
+      <div class="statement-title">Billing statement</div>
+      <div class="statement-row"><span>Item:</span><span id="rbxItem">80 Robux</span></div>
+      <div class="statement-row"><span>Unit price:</span><span id="rbxUnit">₱50.00</span></div>
+      <div class="statement-row"><span>Quantity:</span><span id="rbxQuantity">1</span></div>
+      <div class="statement-row"><span>Subtotal:</span><span id="rbxSubtotal">₱50.00</span></div>
+      <div class="statement-row"><span>Service fee (₱10):</span><span id="rbxFee">₱10.00</span></div>
+      <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="rbxTotal">₱60.00</span></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="resetForm('rbx')">Reset</button>
+      <button class="btn btn-primary" onclick="pay('rbx')">Pay</button>
+    </div>
+  </div>
+
+<div id="gameDetails4" class="game-details">
+  <h3>League of Legends</h3>
+  <p>Select an RP package, set quantity, and confirm total before payment.</p>
+
+  <div class="billing-grid">
+    <div class="form-group">
+      <label for="lolPackage">Package</label>
+      <select id="lolPackage">
+        <option value="310">310 RP — ₱250</option>
+        <option value="790">790 RP — ₱600</option>
+        <option value="1260">1260 RP — ₱950</option>
+        <option value="2575">2575 RP — ₱1,900</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="lolQty">Quantity</label>
+      <input type="number" id="lolQty" min="1" value="1">
+    </div>
+  </div>
+
+  <div class="statement" id="lolStatement">
+    <div class="statement-title">Billing statement</div>
+    <div class="statement-row"><span>Item:</span><span id="lolItem">310 RP</span></div>
+    <div class="statement-row"><span>Unit price:</span><span id="lolUnit">₱250.00</span></div>
+    <div class="statement-row"><span>Quantity:</span><span id="lolQuantity">1</span></div>
+    <div class="statement-row"><span>Subtotal:</span><span id="lolSubtotal">₱250.00</span></div>
+    <div class="statement-row"><span>Service fee (₱10):</span><span id="lolFee">₱10.00</span></div>
+    <div class="statement-row" style="font-weight:600;color:#9fd0ff;">
+      <span>Total due:</span><span id="lolTotal">₱260.00</span>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetForm('lol')">Reset</button>
+    <button class="btn btn-primary" onclick="pay('lol')">Pay</button>
+  </div>
+</div>
+
+	<div id="gameDetails5" class="game-details">
+  <h3>Call of Duty: Mobile</h3>
+  <p>Select a CP package, set quantity, and confirm total before payment.</p>
+
+  <div class="billing-grid">
+    <div class="form-group">
+      <label for="codmPackage">Package</label>
+      <select id="codmPackage">
+        <option value="80">80 CP — ₱50</option>
+        <option value="420">420 CP — ₱250</option>
+        <option value="880">880 CP — ₱500</option>
+        <option value="2400">2400 CP — ₱1,200</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="codmQty">Quantity</label>
+      <input type="number" id="codmQty" min="1" value="1">
+    </div>
+  </div>
+
+  <div class="statement" id="codmStatement">
+    <div class="statement-title">Billing statement</div>
+    <div class="statement-row"><span>Item:</span><span id="codmItem">80 CP</span></div>
+    <div class="statement-row"><span>Unit price:</span><span id="codmUnit">₱50.00</span></div>
+    <div class="statement-row"><span>Quantity:</span><span id="codmQuantity">1</span></div>
+    <div class="statement-row"><span>Subtotal:</span><span id="codmSubtotal">₱50.00</span></div>
+    <div class="statement-row"><span>Service fee (₱10):</span><span id="codmFee">₱10.00</span></div>
+    <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="codmTotal">₱60.00</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetForm('codm')">Reset</button>
+    <button class="btn btn-primary" onclick="pay('codm')">Pay</button>
+  </div>
+</div>
+
+<div id="gameDetails6" class="game-details">
+  <h3>PUBG Mobile</h3>
+  <p>Select a UC package, set quantity, and confirm total before payment.</p>
+
+  <div class="billing-grid">
+    <div class="form-group">
+      <label for="pubgPackage">Package</label>
+      <select id="pubgPackage">
+        <option value="60">60 UC — ₱50</option>
+        <option value="325">325 UC — ₱250</option>
+        <option value="660">660 UC — ₱500</option>
+        <option value="1800">1800 UC — ₱1,200</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="pubgQty">Quantity</label>
+      <input type="number" id="pubgQty" min="1" value="1">
+    </div>
+  </div>
+
+  <div class="statement" id="pubgStatement">
+    <div class="statement-title">Billing statement</div>
+    <div class="statement-row"><span>Item:</span><span id="pubgItem">60 UC</span></div>
+    <div class="statement-row"><span>Unit price:</span><span id="pubgUnit">₱50.00</span></div>
+    <div class="statement-row"><span>Quantity:</span><span id="pubgQuantity">1</span></div>
+    <div class="statement-row"><span>Subtotal:</span><span id="pubgSubtotal">₱50.00</span></div>
+    <div class="statement-row"><span>Service fee (₱10):</span><span id="pubgFee">₱10.00</span></div>
+    <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="pubgTotal">₱60.00</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetForm('pubg')">Reset</button>
+    <button class="btn btn-primary" onclick="pay('pubg')">Pay</button>
+  </div>
+</div>
+
+<div id="gameDetails6" class="game-details">
+  <h3>PUBG Mobile</h3>
+  <p>Select a UC package, set quantity, and confirm total before payment.</p>
+
+  <div class="billing-grid">
+    <div class="form-group">
+      <label for="pubgPackage">Package</label>
+      <select id="pubgPackage">
+        <option value="60">60 UC — ₱50</option>
+        <option value="325">325 UC — ₱250</option>
+        <option value="660">660 UC — ₱500</option>
+        <option value="1800">1800 UC — ₱1,200</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="pubgQty">Quantity</label>
+      <input type="number" id="pubgQty" min="1" value="1">
+    </div>
+  </div>
+
+  <div class="statement" id="pubgStatement">
+    <div class="statement-title">Billing statement</div>
+    <div class="statement-row"><span>Item:</span><span id="pubgItem">60 UC</span></div>
+    <div class="statement-row"><span>Unit price:</span><span id="pubgUnit">₱50.00</span></div>
+    <div class="statement-row"><span>Quantity:</span><span id="pubgQuantity">1</span></div>
+    <div class="statement-row"><span>Subtotal:</span><span id="pubgSubtotal">₱50.00</span></div>
+    <div class="statement-row"><span>Service fee (₱10):</span><span id="pubgFee">₱10.00</span></div>
+    <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="pubgTotal">₱60.00</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetForm('pubg')">Reset</button>
+    <button class="btn btn-primary" onclick="pay('pubg')">Pay</button>
+  </div>
+</div>
+
+<div id="gameDetails7" class="game-details">
+  <h3>Counter-Strike 2</h3>
+  <p>Select a Coins package, set quantity, and confirm total before payment.</p>
+
+  <div class="billing-grid">
+    <div class="form-group">
+      <label for="cs2Package">Package</label>
+      <select id="cs2Package">
+        <option value="100">100 Coins — ₱100</option>
+        <option value="500">500 Coins — ₱450</option>
+        <option value="1200">1200 Coins — ₱1,000</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cs2Qty">Quantity</label>
+      <input type="number" id="cs2Qty" min="1" value="1">
+    </div>
+  </div>
+
+  <div class="statement" id="cs2Statement">
+    <div class="statement-title">Billing statement</div>
+    <div class="statement-row"><span>Item:</span><span id="cs2Item">100 Coins</span></div>
+    <div class="statement-row"><span>Unit price:</span><span id="cs2Unit">₱100.00</span></div>
+    <div class="statement-row"><span>Quantity:</span><span id="cs2Quantity">1</span></div>
+    <div class="statement-row"><span>Subtotal:</span><span id="cs2Subtotal">₱100.00</span></div>
+    <div class="statement-row"><span>Service fee (₱10):</span><span id="cs2Fee">₱10.00</span></div>
+    <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="cs2Total">₱110.00</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetForm('cs2')">Reset</button>
+    <button class="btn btn-primary" onclick="pay('cs2')">Pay</button>
+  </div>
+</div>
+
+<div id="gameDetails8" class="game-details">
+  <h3>Dota 2</h3>
+  <p>Select a RP package, set quantity, and confirm total before payment.</p>
+
+  <div class="billing-grid">
+    <div class="form-group">
+      <label for="dotaPackage">Package</label>
+      <select id="dotaPackage">
+        <option value="100">100 RP — ₱100</option>
+        <option value="600">600 RP — ₱500</option>
+        <option value="1200">1200 RP — ₱950</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="dotaQty">Quantity</label>
+      <input type="number" id="dotaQty" min="1" value="1">
+    </div>
+  </div>
+
+  <div class="statement" id="dotaStatement">
+    <div class="statement-title">Billing statement</div>
+    <div class="statement-row"><span>Item:</span><span id="dotaItem">100 RP</span></div>
+    <div class="statement-row"><span>Unit price:</span><span id="dotaUnit">₱100.00</span></div>
+    <div class="statement-row"><span>Quantity:</span><span id="dotaQuantity">1</span></div>
+    <div class="statement-row"><span>Subtotal:</span><span id="dotaSubtotal">₱100.00</span></div>
+    <div class="statement-row"><span>Service fee (₱10):</span><span id="dotaFee">₱10.00</span></div>
+    <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="dotaTotal">₱110.00</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetForm('dota')">Reset</button>
+    <button class="btn btn-primary" onclick="pay('dota')">Pay</button>
+  </div>
+</div>
+
+<div id="gameDetails9" class="game-details">
+  <h3>Clash of Clans</h3>
+  <p>Select a Gems package, set quantity, and confirm total before payment.</p>
+
+  <div class="billing-grid">
+    <div class="form-group">
+      <label for="cocPackage">Package</label>
+      <select id="cocPackage">
+        <option value="500">500 Gems — ₱250</option>
+        <option value="1200">1200 Gems — ₱500</option>
+        <option value="2500">2500 Gems — ₱950</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="cocQty">Quantity</label>
+      <input type="number" id="cocQty" min="1" value="1">
+    </div>
+  </div>
+
+  <div class="statement" id="cocStatement">
+    <div class="statement-title">Billing statement</div>
+    <div class="statement-row"><span>Item:</span><span id="cocItem">500 Gems</span></div>
+    <div class="statement-row"><span>Unit price:</span><span id="cocUnit">₱250.00</span></div>
+    <div class="statement-row"><span>Quantity:</span><span id="cocQuantity">1</span></div>
+    <div class="statement-row"><span>Subtotal:</span><span id="cocSubtotal">₱250.00</span></div>
+    <div class="statement-row"><span>Service fee (₱10):</span><span id="cocFee">₱10.00</span></div>
+    <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="cocTotal">₱260.00</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetForm('coc')">Reset</button>
+    <button class="btn btn-primary" onclick="pay('coc')">Pay</button>
+  </div>
+</div>
+
+<div id="gameDetails10" class="game-details">
+  <h3>Fortnite</h3>
+  <p>Select a V-Bucks package, set quantity, and confirm total before payment.</p>
+
+  <div class="billing-grid">
+    <div class="form-group">
+      <label for="fortPackage">Package</label>
+      <select id="fortPackage">
+        <option value="1000">1000 V-Bucks — ₱500</option>
+        <option value="2800">2800 V-Bucks — ₱1,200</option>
+        <option value="5000">5000 V-Bucks — ₱2,000</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="fortQty">Quantity</label>
+      <input type="number" id="fortQty" min="1" value="1">
+    </div>
+  </div>
+
+  <div class="statement" id="fortStatement">
+    <div class="statement-title">Billing statement</div>
+    <div class="statement-row"><span>Item:</span><span id="fortItem">1000 V-Bucks</span></div>
+    <div class="statement-row"><span>Unit price:</span><span id="fortUnit">₱500.00</span></div>
+    <div class="statement-row"><span>Quantity:</span><span id="fortQuantity">1</span></div>
+    <div class="statement-row"><span>Subtotal:</span><span id="fortSubtotal">₱500.00</span></div>
+    <div class="statement-row"><span>Service fee (₱10):</span><span id="fortFee">₱10.00</span></div>
+    <div class="statement-row" style="font-weight:600;color:#9fd0ff;"><span>Total due:</span><span id="fortTotal">₱510.00</span></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-secondary" onclick="resetForm('fort')">Reset</button>
+    <button class="btn btn-primary" onclick="pay('fort')">Pay</button>
+  </div>
+</div>
+      <div style="margin-top: 2.5rem;">
+        <a href="new 3.html" class="cta-btn">Home</a>
+      </div>
+
+	<section class="about-section">
+		<h2>About CrediX</h2>
+		<p>
+		CrediX is your trusted online platform for fast and secure game top‑ups.  
+		We provide affordable packages for the most popular titles — from MLBB and VALORANT to Fortnite and Clash of Clans.  
+		Our mission is to make topping up simple, transparent, and accessible for every gamer.
+		</p>
+		<p>
+		With a sleek futuristic design and real‑time billing, CrediX ensures you always know what you’re paying for.  
+		Whether you’re a casual player or a competitive pro, we’re here to power up your gaming experience.
+		</p>
+	</section>
+	
+
+  <footer>
+    <p>&copy; 2025 CrediX. All Rights Reserved.</p>
+  </footer>
+
+  <script>
+const prices = {
+  mlbb: { '50 Diamonds': 50, '150 Diamonds': 140, '300 Diamonds': 270, '600 Diamonds': 520 },
+  val:  { '300 VP': 250, '625 VP': 500, '1125 VP': 900, '2400 VP': 1800 },
+  rbx:  { '80 Robux': 50, '400 Robux': 250, '800 Robux': 500, '1700 Robux': 1000 },
+  lol:  { '310 RP': 250, '790 RP': 600, '1260 RP': 950, '2575 RP': 1900 },
+  codm: { '80 CP': 50, '420 CP': 250, '880 CP': 500, '2400 CP': 1200 },
+  pubg: { '60 UC': 50, '325 UC': 250, '660 UC': 500, '1800 UC': 1200 },
+  cs2:  { '100 Coins': 100, '500 Coins': 450, '1200 Coins': 1000 },
+  dota: { '100 RP': 100, '600 RP': 500, '1200 RP': 950 },
+  coc:  { '500 Gems': 250, '1200 Gems': 500, '2500 Gems': 950 },
+  fort: { '1000 V-Bucks': 500, '2800 V-Bucks': 1200, '5000 V-Bucks': 2000 }
+};
+
+const valueLabelMap = {
+  mlbb: { '50': '50 Diamonds', '150': '150 Diamonds', '300': '300 Diamonds', '600': '600 Diamonds' },
+  val:  { '300': '300 VP', '625': '625 VP', '1125': '1125 VP', '2400': '2400 VP' },
+  rbx:  { '80': '80 Robux', '400': '400 Robux', '800': '800 Robux', '1700': '1700 Robux' },
+  lol:  { '310': '310 RP', '790': '790 RP', '1260': '1260 RP', '2575': '2575 RP' },
+  codm: { '80': '80 CP', '420': '420 CP', '880': '880 CP', '2400': '2400 CP' },
+  pubg: { '60': '60 UC', '325': '325 UC', '660': '660 UC', '1800': '1800 UC' },
+  cs2:  { '100': '100 Coins', '500': '500 Coins', '1200': '1200 Coins' },
+  dota: { '100': '100 RP', '600': '600 RP', '1200': '1200 RP' },
+  coc:  { '500': '500 Gems', '1200': '1200 Gems', '2500': '2500 Gems' },
+  fort: { '1000': '1000 V-Bucks', '2800': '2800 V-Bucks', '5000': '5000 V-Bucks' }
+};
+
+
+    const SERVICE_FEE = 10;
+
+    function showGameDetails(gameId) {
+      document.querySelectorAll('.game-details').forEach(d => d.classList.remove('active'));
+      document.getElementById('gameDetails' + gameId).classList.add('active');
+    }
+
+    function formatPHP(amount) {
+      return '₱' + Number(amount).toLocaleString('en-PH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    }
+
+    function updateStatement(key) {
+      const select = document.getElementById(key + 'Package');
+      const qtyInput = document.getElementById(key + 'Qty');
+
+      const val = select.value;
+      const label = valueLabelMap[key][val];
+      const unitPrice = prices[key][label];
+      const qty = Math.max(1, parseInt(qtyInput.value || '1', 10));
+
+      const subtotal = unitPrice * qty;
+      const total = subtotal + SERVICE_FEE;
+
+      document.getElementById(key + 'Item').textContent = label;
+      document.getElementById(key + 'Unit').textContent = formatPHP(unitPrice);
+      document.getElementById(key + 'Quantity').textContent = qty;
+      document.getElementById(key + 'Subtotal').textContent = formatPHP(subtotal);
+      document.getElementById(key + 'Fee').textContent = formatPHP(SERVICE_FEE);
+      document.getElementById(key + 'Total').textContent = formatPHP(total);
+    }
+
+    function resetForm(key) {
+      const select = document.getElementById(key + 'Package');
+      const qtyInput = document.getElementById(key + 'Qty');
+      qtyInput.value = 1;
+      select.selectedIndex = 0;
+      updateStatement(key);
+    }
+
+    function pay(key) {
+      const item = document.getElementById(key + 'Item').textContent;
+      const qty = document.getElementById(key + 'Quantity').textContent;
+      const total = document.getElementById(key + 'Total').textContent;
+
+      alert(`Payment received!\n\nItem: ${item}\nQuantity: ${qty}\nTotal: ${total}\n\nThank you for topping up with CrediX.`);
+      resetForm(key);
+    }
+
+['mlbb','val','rbx','lol','codm','pubg','cs2','dota','coc','fort'].forEach(key => {
+  const select = document.getElementById(key + 'Package');
+  const qtyInput = document.getElementById(key + 'Qty');
+  select && select.addEventListener('change', () => updateStatement(key));
+  qtyInput && qtyInput.addEventListener('input', () => updateStatement(key));
+  updateStatement(key);
+});
+  </script>
+</body>
+</html>
