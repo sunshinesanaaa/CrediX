@@ -32,6 +32,15 @@
       box-shadow: 0 0 10px var(--cyan);
     }
 
+    /* Logo styling */
+    .logo {
+      width: 120px;
+      height: auto;
+      display: block;
+      margin: 0 auto 15px;
+      filter: drop-shadow(0 0 8px var(--cyan));
+    }
+
     header h1 {
       font-size: 2.5rem;
       margin: 0;
@@ -76,38 +85,40 @@
       transform: translateY(-3px);
       box-shadow: 0 0 16px rgba(0, 234, 255, 0.6);
     }
-	#advertisement {
-  margin: 60px auto;
-  max-width: 900px;
-  padding: 20px;
-}
 
-#advertisement h2 {
-  color: var(--cyan);
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-  text-shadow: 0 0 6px var(--cyan);
-}
+    /* Tutorial Section */
+    #Tutorial {
+      margin: 60px auto;
+      max-width: 900px;
+      padding: 20px;
+    }
 
-.video-container {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
-}
+    #Tutorial h2 {
+      color: var(--cyan);
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      text-shadow: 0 0 6px var(--cyan);
+    }
 
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 12px;
-}
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 234, 255, 0.4);
+    }
 
+    .video-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 12px;
+      object-fit: cover;
+    }
 
     footer {
       background-color: var(--panel);
@@ -120,20 +131,22 @@
 </head>
 <body>
   <header>
+    <!-- 🔹 Replace 'your-logo.png' with your actual logo file -->
+    <img src="removed.jpg" alt="CrediX Logo" class="logo">
     <h1>Welcome to CrediX</h1>
-    <p>Your trusted online top‑up & gaming hub</p>
+    <p>Your trusted online top-up & gaming hub</p>
   </header>
 
   <!-- About Section -->
   <section id="about">
     <h2>About CrediX</h2>
     <p>
-      CrediX is your trusted online platform for fast and secure game top‑ups.  
+      CrediX is your trusted online platform for fast and secure game top-ups.  
       We provide affordable packages for the most popular titles — from MLBB and VALORANT to Fortnite and Clash of Clans.  
       Our mission is to make topping up simple, transparent, and accessible for every gamer.
     </p>
     <p>
-      With a sleek futuristic design and real‑time billing, CrediX ensures you always know what you’re paying for.  
+      With a sleek futuristic design and real-time billing, CrediX ensures you always know what you’re paying for.  
       Whether you’re a casual player or a competitive pro, we’re here to power up your gaming experience.
     </p>
   </section>
@@ -143,7 +156,7 @@
     <h2>Meet the Developers</h2>
     <p>
       Behind CrediX is a passionate team of developers and designers who love gaming as much as you do.  
-      We combine technical expertise with creative vision to deliver a platform that feels modern, secure, and gamer‑friendly.
+      We combine technical expertise with creative vision to deliver a platform that feels modern, secure, and gamer-friendly.
     </p>
     <p>
       Want to know more about the people who built CrediX?  
@@ -155,25 +168,24 @@
   <section id="products">
     <h2>Our Products</h2>
     <p>
-      Explore our wide range of top‑up packages for your favorite games.  
+      Explore our wide range of top-up packages for your favorite games.  
       Fast, secure, and affordable — just one click away.
     </p>
     <a href="revised.html" class="btn">View Products</a>
   </section>
-    <!-- Advertisement Section -->
-  <section id="advertisement">
-    <h2>Watch Our Ad</h2>
+
+  <!-- Tutorial Section -->
+  <section id="Tutorial">
+    <h2>How to Use</h2>
     <div class="video-container">
-      <iframe width="800" height="450" 
-        src="https://youtu.be/0sj1TyZH_9A" 
-        title="CrediX Advertisement" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
+      <!Video-->
+      <video controls autoplay loop muted>
+        <source src="tutorial.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
     </div>
     <p>
-      Experience the future of gaming top‑ups with CrediX — fast, secure, and built for gamers like you.
+      Experience the future of gaming top-ups with CrediX — fast, secure, and built for gamers like you.
     </p>
   </section>
 
